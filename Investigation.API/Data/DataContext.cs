@@ -12,6 +12,9 @@ namespace Investigation.API.Data
         } 
 
         public DbSet<Investigadores>Investigadores {  get; set; }
+        public DbSet<ProyectoInvestigacion> ProyectoInvestigacion { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
