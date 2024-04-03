@@ -23,6 +23,16 @@ namespace Investigation.Shared.Entities
         public string Descripcion { get; set; }
 
 
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "El campo {0} es obligaptorio")]
+        public DateTime FechaInicio { get; set; }
+
+
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "El campo {0} es obligaptorio")]
+        public DateTime FechaFinal { get; set; }
+
+
 
     }
 }
