@@ -7,7 +7,7 @@ namespace Investigation.API.Controllers
 {
 
     [ApiController]
-    [Route("/api/publicacion")]
+    [Route("/api/Publicaciones")]
     public class PublicacionControllers:ControllerBase
     {
         private readonly DataContext _context;
@@ -20,7 +20,7 @@ namespace Investigation.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Publicacion.ToListAsync());
+            return Ok(await _context.Publicaciones.ToListAsync());
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace Investigation.API.Controllers
         {
 
             var publicacion = await
-                _context.Publicacion.FirstOrDefaultAsync(x => x.Id
+                _context.Publicaciones.FirstOrDefaultAsync(x => x.Id
                 == id);
             if (publicacion == null)
             {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Investigation.API.Controllers
 {
     [ApiController]
-    [Route("/api/Proyectoinvestigacion")]
+    [Route("/api/ProyectoInvestigacion")]
     public class ProyectoInvestigacionControllers:ControllerBase
     {
         private readonly DataContext _context;
@@ -19,11 +19,11 @@ namespace Investigation.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.ActividadesInvestigacion.ToListAsync());
+            return Ok(await _context.ActividadesInvestigaciones.ToListAsync());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(ActividadesInvestigacion actividadesInvestigacion)
+        public async Task<ActionResult> Post(ActividadesInvestigacion actividadesInvestigaciones)
         {
             _context.Add(actividadesInvestigacion);
             await _context.SaveChangesAsync();

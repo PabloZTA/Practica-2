@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Investigation.API.Controllers
 {
     [ApiController]
-    [Route("/api/investigadores")]
+    [Route("/api/Investigadores")]
     public class InvestigadoresControllers:ControllerBase
     {
         private readonly DataContext _context;
@@ -24,33 +24,33 @@ namespace Investigation.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult>Post(Investigadores investigadores)
+        public async Task<ActionResult>Post(Investigadores Investigadores)
         {
-            _context.Add(investigadores);
+            _context.Add(Investigadores);
             await _context.SaveChangesAsync();
-            return Ok(investigadores);
+            return Ok(Investigadores);
         }
 
         [HttpGet("id:int")]
         public async Task<ActionResult>Get(int id)
         {
 
-            var investigadores = await
+            var Investigadores = await
                 _context.Investigadores.FirstOrDefaultAsync(x => x.Id
                 == id);
-            if (investigadores == null)
+            if (Investigadores == null)
             {
                 return NotFound();
             }
-            return Ok(investigadores);
+            return Ok(Investigadores);
         }
 
         [HttpPut]
-        public async Task<ActionResult>Put(Investigadores investigadores)
+        public async Task<ActionResult>Put(Investigadores Investigadores)
         {
-            _context.Add(investigadores);
+            _context.Add(Investigadores);
             await _context.SaveChangesAsync();
-            return Ok(investigadores);
+            return Ok(Investigadores);
         }
 
         [HttpDelete("id:int")]

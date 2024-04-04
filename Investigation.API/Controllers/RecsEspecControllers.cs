@@ -20,7 +20,7 @@ namespace Investigation.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.RecurdosEspecializados.ToListAsync());
+            return Ok(await _context.RecursosEspecializados.ToListAsync());
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace Investigation.API.Controllers
         {
 
             var recursosEspecializados = await
-                _context.RecurdosEspecializados.FirstOrDefaultAsync(x => x.Id
+                _context.RecursosEspecializados.FirstOrDefaultAsync(x => x.Id
                 == id);
             if (recursosEspecializados == null)
             {
@@ -58,7 +58,7 @@ namespace Investigation.API.Controllers
         public async Task<ActionResult> Delete(int id)
         {
 
-            var Filasafectadas = await _context.RecurdosEspecializados
+            var Filasafectadas = await _context.RecursosEspecializados
 
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
