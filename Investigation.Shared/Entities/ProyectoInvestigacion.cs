@@ -36,13 +36,13 @@ namespace Investigation.Shared.Entities
         //public RecursosEspecializados RecursosEspecializados { get; set; }
 
         //Relacion con actividades de Investigacion
-        public ICollection<ActividadesInvestigacion> ActividadesInvestigacion { get; set; } = new HashSet<ActividadesInvestigacion>();
+        public ICollection<ActividadesInvestigacion> ActividadesInvestigacion { get; set; } = new List<ActividadesInvestigacion>();
 
         //Relacion con recursos especializados
-        public ICollection<RecursosEspecializados> RecursosEspecializados { get; set; } = new HashSet<RecursosEspecializados>();
+        public ICollection<RecursosEspecializados> RecursosEspecializados { get; set; } = new List<RecursosEspecializados>();
 
         //Relacion con publicaciones
-        public ICollection<Publicacion> Publicaciones { get; set; } = new HashSet<Publicacion>();
+        public ICollection<Publicacion> Publicaciones { get; set; } = new List<Publicacion>();
 
 
     }

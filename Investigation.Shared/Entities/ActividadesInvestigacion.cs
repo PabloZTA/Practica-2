@@ -39,7 +39,7 @@ namespace Investigation.Shared.Entities
         public ProyectoInvestigacion ProyectoInvestigacion { get; set; }
  
         //Relacion con recursos especializados
-        public ICollection<RecursosEspecializados> RecursosEspecializados { get; set; } = new HashSet<RecursosEspecializados>();
+        public ICollection<RecursosEspecializados> RecursosEspecializados { get; set; } = new List<RecursosEspecializados>();
 
 
     }
