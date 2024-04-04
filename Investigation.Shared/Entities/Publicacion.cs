@@ -25,5 +25,7 @@ namespace Investigation.Shared.Entities
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public DateTime FechaPublicacion { get; set; }
+
+        public ICollection<ProyectoInvestigacion> Proyectos { get; set; }
     }
 }

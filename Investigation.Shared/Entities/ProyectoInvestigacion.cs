@@ -32,6 +32,8 @@ namespace Investigation.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public DateTime FechaFinal { get; set; }
 
+        public Investigadores Investigadores { get; set; }
+        public RecursosEspecializados RecursosEspecializados { get; set; }
 
 
     }

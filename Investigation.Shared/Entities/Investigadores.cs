@@ -24,5 +24,7 @@ namespace Investigation.Shared.Entities
         [MaxLength(100, ErrorMessage = "No se permiten más de 100 dígitos")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string afiliacion { get; set; }
+
+        public ICollection<ProyectoInvestigacion> proyectos { get; set; }
     }
 }

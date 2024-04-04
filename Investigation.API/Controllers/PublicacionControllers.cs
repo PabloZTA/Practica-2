@@ -5,58 +5,59 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Investigation.API.Controllers
 {
+
     [ApiController]
-    [Route("/api/investigadores")]
-    public class InvestigadoresControllers:ControllerBase
+    [Route("/api/publicacion")]
+    public class PublicacionControllers:ControllerBase
     {
         private readonly DataContext _context;
 
-        public InvestigadoresControllers(DataContext context)
+        public PublicacionControllers(DataContext context)
         {
             _context = context;
         }
 
-
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Investigadores.ToListAsync());
+            return Ok(await _context.Publicacion.ToListAsync());
         }
 
         [HttpPost]
-        public async Task<ActionResult>Post(Investigadores investigadores)
+        public async Task<ActionResult> Post(Publicacion publicacion)
         {
-            _context.Add(investigadores);
+            _context.Add(publicacion);
             await _context.SaveChangesAsync();
-            return Ok(investigadores);
+            return Ok(publicacion);
         }
 
+
         [HttpGet("id:int")]
-        public async Task<ActionResult>Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
 
-            var investigadores = await
-                _context.Investigadores.FirstOrDefaultAsync(x => x.Id
+            var publicacion = await
+                _context.Publicacion.FirstOrDefaultAsync(x => x.Id
                 == id);
-            if (investigadores == null)
+            if (publicacion == null)
             {
                 return NotFound();
             }
-            return Ok(investigadores);
+            return Ok(publicacion);
         }
 
         [HttpPut]
-        public async Task<ActionResult>Put(Investigadores investigadores)
+        public async Task<ActionResult> Put(Publicacion publicacion)
         {
-            _context.Add(investigadores);
+            _context.Add(publicacion);
             await _context.SaveChangesAsync();
-            return Ok(investigadores);
+            return Ok(publicacion);
         }
 
         [HttpDelete("id:int")]
         public async Task<ActionResult> Delete(int id)
         {
-            
+
             var Filasafectadas = await _context.Investigadores
 
                 .Where(x => x.Id == id)
@@ -69,8 +70,5 @@ namespace Investigation.API.Controllers
 
             return NoContent();
         }
-
     }
-
-
 }

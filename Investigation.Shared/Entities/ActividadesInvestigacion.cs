@@ -35,5 +35,9 @@ namespace Investigation.Shared.Entities
 
         public DateTime FechaFinal { get; set; }
 
+        public ProyectoInvestigacion ProyectoInvestigacion { get; set; }
+        public RecursosEspecializados RecursosEspecializados { get; set; }
+
+
     }
 }
