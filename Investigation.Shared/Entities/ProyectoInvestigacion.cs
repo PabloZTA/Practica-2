@@ -48,6 +48,7 @@ namespace Investigation.Shared.Entities
 
         //Relacion con publicaciones
         public ICollection<Publicacion> Publicaciones { get; set; } = new List<Publicacion>();
+ 
 
 
     }

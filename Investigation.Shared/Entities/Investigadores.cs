@@ -25,6 +25,6 @@ namespace Investigation.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string afiliacion { get; set; }
 
-
+        public ProyectoInvestigacion ProyectoInvestigacion { get; set; }
     }
 }
