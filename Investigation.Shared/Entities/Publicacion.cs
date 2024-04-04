@@ -26,6 +26,7 @@ namespace Investigation.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public DateTime FechaPublicacion { get; set; }
 
-        public ICollection<ProyectoInvestigacion> Proyectos { get; set; }
+        //Relacion con proyectos de investigacion
+        public ProyectoInvestigacion Proyectos { get; set; }
     }
 }

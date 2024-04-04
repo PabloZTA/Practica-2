@@ -32,8 +32,17 @@ namespace Investigation.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public DateTime FechaFinal { get; set; }
 
-        public Investigadores Investigadores { get; set; }
-        public RecursosEspecializados RecursosEspecializados { get; set; }
+        //public Investigadores Investigadores { get; set; }
+        //public RecursosEspecializados RecursosEspecializados { get; set; }
+
+        //Relacion con actividades de Investigacion
+        public ICollection<ActividadesInvestigacion> ActividadesInvestigacion { get; set; } = new HashSet<ActividadesInvestigacion>();
+
+        //Relacion con recursos especializados
+        public ICollection<RecursosEspecializados> RecursosEspecializados { get; set; } = new HashSet<RecursosEspecializados>();
+
+        //Relacion con publicaciones
+        public ICollection<Publicacion> Publicaciones { get; set; } = new HashSet<Publicacion>();
 
 
     }

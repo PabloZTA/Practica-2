@@ -21,7 +21,6 @@ namespace Investigation.API.Data
         {
             base.OnModelCreating(modelBuilder);
         }
-     
         
     }
 }

@@ -33,8 +33,8 @@ namespace Investigation.Shared.Entities
 
         public DateTime FechaEntrega { get; set; }
 
-
-        public ICollection<ActividadesInvestigacion> actividades { get; set; }
+        //Relacion con actividades de investigacion
+        public ProyectoInvestigacion Proyectos { get; set; }
 
     }
 }
