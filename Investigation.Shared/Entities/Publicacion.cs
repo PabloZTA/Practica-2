@@ -30,6 +30,6 @@ namespace Investigation.Shared.Entities
         //Relacion con proyectos de investigacion
         [JsonIgnore]
 
-        public ProyectoInvestigacion Proyectos { get; set; }
+        public ProyectoInvestigacion ProyectosInvestigaciones { get; set; }
     }
 }

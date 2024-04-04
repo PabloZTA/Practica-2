@@ -39,7 +39,7 @@ namespace Investigation.Shared.Entities
         //Relacion con actividades de
         [JsonIgnore]
 
-        public ICollection<ActividadesInvestigacion> ActividadesInvestigacion { get; set; } = new List<ActividadesInvestigacion>();
+        public ICollection<ActividadesInvestigacion> ActividadesInvestigaciones { get; set; } = new List<ActividadesInvestigacion>();
         [JsonIgnore]
 
         //Relacion con recursos especializados

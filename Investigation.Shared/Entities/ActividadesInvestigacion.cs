@@ -36,7 +36,7 @@ namespace Investigation.Shared.Entities
         public DateTime FechaFinal { get; set; }
 
         //Relacion con proyectos de investigacion cientifica
-        public ProyectoInvestigacion ProyectoInvestigacion { get; set; }
+        public ProyectoInvestigacion ProyectoInvestigaciones { get; set; }
  
         //Relacion con recursos especializados
         public ICollection<RecursosEspecializados> RecursosEspecializados { get; set; } = new List<RecursosEspecializados>();

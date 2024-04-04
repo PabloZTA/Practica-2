@@ -16,6 +16,6 @@ namespace Investigation.Shared.Entities
 
         public int InvestigadoresId { get; set; }
 
-        public Investigadores investigadoress { get; set; }
+        public Investigadores Investigadores { get; set; }
     }
 }
