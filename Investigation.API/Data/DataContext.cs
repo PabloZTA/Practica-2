@@ -11,11 +11,11 @@ namespace Investigation.API.Data
 
         } 
 
-        public DbSet<Investigadores>Investigadores {  get; set; }
-        public DbSet<ProyectoInvestigacion> ProyectoInvestigacion { get; set; }
-        public DbSet<Publicacion> Publicacion {  get; set; }
-        public DbSet<ActividadesInvestigacion> ActividadesInvestigacion { get; set; }
-        public DbSet<RecursosEspecializados> RecurdosEspecializados { get; set; }
+        public DbSet<Investigadores>Investigadoress {  get; set; }
+        public DbSet<ProyectoInvestigacion> ProyectoInvestigaciones { get; set; }
+        public DbSet<Publicacion> Publicaciones {  get; set; }
+        public DbSet<ActividadesInvestigacion> ActividadesInvestigaciones { get; set; }
+        public DbSet<RecursosEspecializados> RecursosEspecializadoss { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
