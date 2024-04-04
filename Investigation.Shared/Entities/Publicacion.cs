@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Investigation.Shared.Entities
@@ -27,6 +28,8 @@ namespace Investigation.Shared.Entities
         public DateTime FechaPublicacion { get; set; }
 
         //Relacion con proyectos de investigacion
+        [JsonIgnore]
+
         public ProyectoInvestigacion Proyectos { get; set; }
     }
 }

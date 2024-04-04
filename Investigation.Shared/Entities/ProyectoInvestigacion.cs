@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Investigation.Shared.Entities
@@ -35,11 +36,15 @@ namespace Investigation.Shared.Entities
         //public Investigadores Investigadores { get; set; }
         //public RecursosEspecializados RecursosEspecializados { get; set; }
 
-        //Relacion con actividades de Investigacion
+        //Relacion con actividades de
+        [JsonIgnore]
+
         public ICollection<ActividadesInvestigacion> ActividadesInvestigacion { get; set; } = new List<ActividadesInvestigacion>();
+        [JsonIgnore]
 
         //Relacion con recursos especializados
         public ICollection<RecursosEspecializados> RecursosEspecializados { get; set; } = new List<RecursosEspecializados>();
+        [JsonIgnore]
 
         //Relacion con publicaciones
         public ICollection<Publicacion> Publicaciones { get; set; } = new List<Publicacion>();

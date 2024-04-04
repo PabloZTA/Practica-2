@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Investigation.Shared.Entities
@@ -15,6 +16,7 @@ namespace Investigation.Shared.Entities
 
         public int RecursosEspecializadosId { get; set; }
 
-        public RecursosEspecializados RecursosEspecializadoss { get; set; }
+        [JsonIgnore]
+        public ProyectoInvestigacion Proyectos { get; set; }
     }
 }
