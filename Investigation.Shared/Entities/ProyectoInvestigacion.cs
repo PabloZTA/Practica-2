@@ -24,12 +24,12 @@ namespace Investigation.Shared.Entities
 
 
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        [Required(ErrorMessage = "El campo {0} es obligaptorio")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public DateTime FechaInicio { get; set; }
 
 
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        [Required(ErrorMessage = "El campo {0} es obligaptorio")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public DateTime FechaFinal { get; set; }
 
 
