@@ -41,6 +41,8 @@ namespace Investigation.Shared.Entities
         //Relacion con recursos especializados
         public ICollection<RecursosEspecializados> RecursosEspecializados { get; set; } = new List<RecursosEspecializados>();
 
+        public ICollection<Actividad_Recurso> Actividad_Recursos { get; set; } 
+
 
     }
 }

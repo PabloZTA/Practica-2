@@ -7,16 +7,12 @@ using System.Threading.Tasks;
 
 namespace Investigation.Shared.Entities
 {
-    internal class Actividad_Recurso
+    public class Actividad_Recurso
     {
         public int Id { get; set; }
-        public int ActividadInvestigacionId { get; set; }
 
         public ActividadesInvestigacion ActividadesInvestigaciones { get; set; }
 
-        public int RecursosEspecializadosId { get; set; }
-
-        [JsonIgnore]
-        public ProyectoInvestigacion Proyectos { get; set; }
+        public RecursosEspecializados RecursosEspecializadoss { get; set; }
     }
 }
