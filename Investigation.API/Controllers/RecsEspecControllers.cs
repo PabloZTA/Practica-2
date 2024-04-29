@@ -49,7 +49,7 @@ namespace Investigation.API.Controllers
         [HttpPut]
         public async Task<ActionResult> Put(RecursosEspecializados recursosEspecializados)
         {
-            _context.Add(recursosEspecializados);
+            _context.Update(recursosEspecializados);
             await _context.SaveChangesAsync();
             return Ok(recursosEspecializados);
         }

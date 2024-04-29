@@ -49,7 +49,7 @@ namespace Investigation.API.Controllers
         [HttpPut]
         public async Task<ActionResult> Put(Publicacion publicacion)
         {
-            _context.Add(publicacion);
+            _context.Update(publicacion);
             await _context.SaveChangesAsync();
             return Ok(publicacion);
         }

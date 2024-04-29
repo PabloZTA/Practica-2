@@ -20,7 +20,7 @@ namespace Investigation.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.Investigadores.ToListAsync());
+            return Ok(await _context.Investigadoress.ToListAsync());
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace Investigation.API.Controllers
         {
 
             var Investigadores = await
-                _context.Investigadores.FirstOrDefaultAsync(x => x.Id
+                _context.Investigadoress.FirstOrDefaultAsync(x => x.Id
                 == id);
             if (Investigadores == null)
             {
@@ -48,7 +48,7 @@ namespace Investigation.API.Controllers
         [HttpPut]
         public async Task<ActionResult>Put(Investigadores Investigadores)
         {
-            _context.Add(Investigadores);
+            _context.Update(Investigadores);
             await _context.SaveChangesAsync();
             return Ok(Investigadores);
         }
@@ -57,7 +57,7 @@ namespace Investigation.API.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             
-            var Filasafectadas = await _context.Investigadores
+            var Filasafectadas = await _context.Investigadoress
 
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
