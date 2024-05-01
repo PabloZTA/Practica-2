@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Investigation.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240404041757_Inicial")]
-    partial class Inicial
+    [Migration("20240429220911_BaseInvest")]
+    partial class BaseInvest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,29 @@ namespace Investigation.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Investigation.Shared.Entities.Actividad_Recurso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ActividadesInvestigacionesId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RecursosEspecializadossId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActividadesInvestigacionesId");
+
+                    b.HasIndex("RecursosEspecializadossId");
+
+                    b.ToTable("Actividad_Recursos");
+                });
 
             modelBuilder.Entity("Investigation.Shared.Entities.ActividadesInvestigacion", b =>
                 {
@@ -59,6 +82,29 @@ namespace Investigation.API.Migrations
                     b.ToTable("ActividadesInvestigaciones");
                 });
 
+            modelBuilder.Entity("Investigation.Shared.Entities.Investigador_Proyecto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("InvestigadoressId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProyectoInvestigacionesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvestigadoressId");
+
+                    b.HasIndex("ProyectoInvestigacionesId");
+
+                    b.ToTable("Investigador_Proyectos");
+                });
+
             modelBuilder.Entity("Investigation.Shared.Entities.Investigadores", b =>
                 {
                     b.Property<int>("Id")
@@ -72,6 +118,9 @@ namespace Investigation.API.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("ProyectoInvestigacionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("afiliacion")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -84,7 +133,9 @@ namespace Investigation.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Investigadores");
+                    b.HasIndex("ProyectoInvestigacionId");
+
+                    b.ToTable("Investigadoress");
                 });
 
             modelBuilder.Entity("Investigation.Shared.Entities.ProyectoInvestigacion", b =>
@@ -186,6 +237,21 @@ namespace Investigation.API.Migrations
                     b.ToTable("RecursosEspecializados");
                 });
 
+            modelBuilder.Entity("Investigation.Shared.Entities.Actividad_Recurso", b =>
+                {
+                    b.HasOne("Investigation.Shared.Entities.ActividadesInvestigacion", "ActividadesInvestigaciones")
+                        .WithMany("Actividad_Recursos")
+                        .HasForeignKey("ActividadesInvestigacionesId");
+
+                    b.HasOne("Investigation.Shared.Entities.RecursosEspecializados", "RecursosEspecializadoss")
+                        .WithMany()
+                        .HasForeignKey("RecursosEspecializadossId");
+
+                    b.Navigation("ActividadesInvestigaciones");
+
+                    b.Navigation("RecursosEspecializadoss");
+                });
+
             modelBuilder.Entity("Investigation.Shared.Entities.ActividadesInvestigacion", b =>
                 {
                     b.HasOne("Investigation.Shared.Entities.ProyectoInvestigacion", "ProyectoInvestigaciones")
@@ -193,6 +259,30 @@ namespace Investigation.API.Migrations
                         .HasForeignKey("ProyectoInvestigacionesId");
 
                     b.Navigation("ProyectoInvestigaciones");
+                });
+
+            modelBuilder.Entity("Investigation.Shared.Entities.Investigador_Proyecto", b =>
+                {
+                    b.HasOne("Investigation.Shared.Entities.Investigadores", "Investigadoress")
+                        .WithMany()
+                        .HasForeignKey("InvestigadoressId");
+
+                    b.HasOne("Investigation.Shared.Entities.ProyectoInvestigacion", "ProyectoInvestigaciones")
+                        .WithMany()
+                        .HasForeignKey("ProyectoInvestigacionesId");
+
+                    b.Navigation("Investigadoress");
+
+                    b.Navigation("ProyectoInvestigaciones");
+                });
+
+            modelBuilder.Entity("Investigation.Shared.Entities.Investigadores", b =>
+                {
+                    b.HasOne("Investigation.Shared.Entities.ProyectoInvestigacion", "ProyectoInvestigacion")
+                        .WithMany()
+                        .HasForeignKey("ProyectoInvestigacionId");
+
+                    b.Navigation("ProyectoInvestigacion");
                 });
 
             modelBuilder.Entity("Investigation.Shared.Entities.Publicacion", b =>
@@ -219,6 +309,8 @@ namespace Investigation.API.Migrations
 
             modelBuilder.Entity("Investigation.Shared.Entities.ActividadesInvestigacion", b =>
                 {
+                    b.Navigation("Actividad_Recursos");
+
                     b.Navigation("RecursosEspecializados");
                 });
 

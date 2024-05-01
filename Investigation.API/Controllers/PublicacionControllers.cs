@@ -58,7 +58,7 @@ namespace Investigation.API.Controllers
         public async Task<ActionResult> Delete(int id)
         {
 
-            var Filasafectadas = await _context.Investigadores
+            var Filasafectadas = await _context.Investigadoress
 
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
