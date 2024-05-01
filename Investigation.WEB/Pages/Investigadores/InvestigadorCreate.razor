@@ -1,65 +1,11 @@
-﻿﻿@page "/investigadores/create"
-@inject NavigationManager navigationManager
+﻿﻿@page "/usuarios/create"
 @inject IRepository repository
-@inject SweetAlertService sweetAlertService
+@inject NavigationManager navigationManager
+@inject SweetAlertService SweetAlertService
 
-<h3>Crear</h3>
 
-<InvestigadoresForm @ref="investigadoresForm" Investigadores="investigadores" OnValidSubmit="Create" ReturnAction="Return"/>
+<h3>InvestigadorCreate</h3>
 
 @code {
-    private Investigadores investigadores = new investigadores();
-    private InvestigadoresForm investigadoresForm;
-
-
-
-    private async Task Create()
-    {
-
-
-        var responseHttp = await repository.PostAsync("/api/investigadores", investigadores);
-        if (responseHttp.Error)
-        {
-
-            var message = await responseHttp.GetErrorMessageAsync();
-            await sweetAlertService.FireAsync("Error", message);
-            return;
-
-
-        }
-
-        Return();
-        var toast = sweetAlertService.Mixin(new SweetAlertOptions
-            {
-
-                Toast = true,
-                Position = SweetAlertPosition.BottomEnd,
-                ShowConfirmButton = true,
-                Timer = 3000
-
-
-
-
-            });
-
-
-        await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro creado con éxito");
-    }
-
-
-    private void Return()
-    {
-
-
-
-
-        investigadoresForm!.FormularioPosteadoConExito = true;
-        navigationManager.NavigateTo("/investigadores");
-
-
-
-
-    }
-
 
 }
