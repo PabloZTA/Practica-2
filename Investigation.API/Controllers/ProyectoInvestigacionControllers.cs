@@ -19,15 +19,15 @@ namespace Investigation.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.ActividadesInvestigaciones.ToListAsync());
+            return Ok(await _context.ProyectoInvestigaciones.ToListAsync());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(ActividadesInvestigacion actividadesInvestigaciones)
+        public async Task<ActionResult> Post(ProyectoInvestigacion proyectoInvestigacion)
         {
-            _context.Add(actividadesInvestigaciones);
+            _context.Add(proyectoInvestigacion);
             await _context.SaveChangesAsync();
-            return Ok(actividadesInvestigaciones);
+            return Ok(proyectoInvestigacion);
         }
 
         [HttpGet("id:int")]
@@ -35,7 +35,7 @@ namespace Investigation.API.Controllers
         {
 
             var actividadesInvestigacion = await
-                _context.ActividadesInvestigaciones.FirstOrDefaultAsync(x => x.Id
+                _context.ProyectoInvestigaciones.FirstOrDefaultAsync(x => x.Id
                 == id);
             if (actividadesInvestigacion == null)
             {
@@ -45,18 +45,18 @@ namespace Investigation.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(ActividadesInvestigacion actividadesInvestigacion)
+        public async Task<ActionResult> Put(ProyectoInvestigacion proyectoInvestigacion)
         {
-            _context.Update(actividadesInvestigacion);
+            _context.Update(proyectoInvestigacion);
             await _context.SaveChangesAsync();
-            return Ok(actividadesInvestigacion);
+            return Ok(proyectoInvestigacion);
         }
 
         [HttpDelete("id:int")]
         public async Task<ActionResult> Delete(int id)
         {
 
-            var Filasafectadas = await _context.ActividadesInvestigaciones
+            var Filasafectadas = await _context.ProyectoInvestigaciones
 
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();

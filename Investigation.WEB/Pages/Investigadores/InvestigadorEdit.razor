@@ -1,0 +1,75 @@
+﻿@page "/Investigadores/edit/{Id:int}"
+@using System.Net
+@inject NavigationManager navigationManager
+@inject IRepository repository
+@inject SweetAlertService sweetAlertService
+
+<h3>InvestigadorEdit</h3>
+
+@if (investigadores is null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <InvestigadorForm @ref="InvestigadorForm"  Investigadores="investigadores" OnValidSubmit="Editar" ReturnAction="Return"/>
+
+}
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Investigadores investigadores;
+    private InvestigadorForm InvestigadorForm;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var responseHttp = await repository.GetAsync<Investigadores>($"api/Investigadores/{Id}");
+        if (responseHttp.Error)
+        {
+            if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("/Investigadores");
+            }
+            else
+            {
+                var messsage = await responseHttp.GetErrorMessageAsync();
+                await sweetAlertService.FireAsync("Error", messsage, SweetAlertIcon.Error);
+            }
+        }
+        else
+        {
+            investigadores = responseHttp.Response;
+        }
+    }
+
+
+    private async Task Editar()
+    {
+        var responseHttp = await repository.PutAsync("/api/Investigadores", investigadores);
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message);
+            return;
+        }
+
+        Return();
+        var toast = sweetAlertService.Mixin(new SweetAlertOptions
+            {
+                Toast = true,
+                Position = SweetAlertPosition.BottomEnd,
+                ShowConfirmButton = true,
+                Timer = 3000
+            });
+        await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Cambios guardados con éxito.");
+    }
+
+    private void Return()
+    {
+        InvestigadorForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/Investigadores");
+    }
+
+}

@@ -11,8 +11,15 @@ namespace Investigation.Shared.Entities
     {
         public int Id { get; set; }
 
+        [JsonIgnore]
         public ActividadesInvestigacion ActividadesInvestigaciones { get; set; }
 
+        public int ActividadesInvestigacionId { get; set; }
+
+        [JsonIgnore]
         public RecursosEspecializados RecursosEspecializadoss { get; set; }
+
+        public int RecursosEspecializadosId { get; set; }
+
     }
 }

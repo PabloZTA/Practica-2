@@ -31,5 +31,7 @@ namespace Investigation.Shared.Entities
         [JsonIgnore]
 
         public ProyectoInvestigacion ProyectosInvestigaciones { get; set; }
+
+        public int ProyectoInvestigacionId { get; set; }
     }
 }

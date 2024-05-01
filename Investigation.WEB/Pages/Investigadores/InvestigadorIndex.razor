@@ -1,0 +1,60 @@
+﻿@page "/Investigadores"
+@using Investigation.Shared.Entities
+@using Investigation.WEB.Repositories
+@using Investigation.WEB.Shared
+@inject IRepository repository
+@inject SweetAlertService SweetAlertService
+
+<h3>InvestigadorIndex</h3>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/Investigadores/create">Nuevo Investigador</a>
+</div>
+
+<GenericList MyList="Investigadores">
+
+    <Body>
+        <div class="align-items-center">
+        </div>
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Investigadores</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Investigadores in Investigadores!)
+                {
+                    <tr>
+                        <td>@Investigadores.Nombre</td>
+                        <td>@Investigadores.especialidad</td>
+                        <td>@Investigadores.afiliacion</td>
+
+
+                        <td>
+                            <a class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger">Borrar</button>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </Body>
+
+</GenericList>
+
+@code {
+    public List<Investigadores>?  Investigadores { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHppt = await repository.GetAsync<List<Investigadores>>("/api/Investigadores");
+        Investigadores = responseHppt.Response!;
+    }
+}
