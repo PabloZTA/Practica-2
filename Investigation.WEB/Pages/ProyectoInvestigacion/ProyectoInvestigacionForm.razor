@@ -1,0 +1,71 @@
+﻿@using Investigation.Shared.Entities
+@using Investigation.WEB.Repositories
+@using Investigation.WEB.Shared
+@inject IRepository repository
+@inject SweetAlertService SweetAlertService
+
+<EditForm Model="proyectoInvestigacion" OnSubmit="OnSubmit" ReturnAction="Return">
+    <DataAnnotationsValidator />
+
+
+    <div class="mb-3">
+        <label>Nombre_Proyecto:</label>
+        <div>
+            <InputText @bind-Value="proyectoInvestigacion.Nombre_Proyecto" />
+            <ValidationMessage For="@(()=>proyectoInvestigacion.Nombre_Proyecto)" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>Descripcion:</label>
+        <div>
+            <InputText @bind-Value="proyectoInvestigacion.Descripcion" />
+            <ValidationMessage For="@(()=>proyectoInvestigacion.Descripcion)" />
+        </div>
+    </div>
+
+
+    <div class="mb-3">
+        <label>Fecha de Inicio:</label>
+        <div>
+            <InputDate @bind-Value="proyectoInvestigacion.FechaInicio" />
+            <ValidationMessage For="@(()=>proyectoInvestigacion.FechaInicio)" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha de Finalizacion:</label>
+        <div>
+            <InputDate @bind-Value="proyectoInvestigacion.FechaFinal" />
+            <ValidationMessage For="@(()=>proyectoInvestigacion.FechaFinal)" />
+        </div>
+    </div>
+
+
+    <button class="btn btn-primary" type="submit">Guardar</button>
+    <button class="btn btn-info" type="reset">Limpiar</button>
+    <button class="btn btn-success" onclick="ReturnAction">Regresar</button>
+
+</EditForm>
+
+@code {
+
+    [EditorRequired]
+    [Parameter]
+
+    public ProyectoInvestigacion proyectoInvestigacion { get; set; }
+
+
+    [EditorRequired]
+    [Parameter]
+    public EventCallback OnSubmit { get; set; }
+
+
+    [EditorRequired]
+    [Parameter]
+    public EventCallback ReturnAction { get; set; }
+
+
+    public bool FormPostedSuccessfully { get; set; }
+
+}

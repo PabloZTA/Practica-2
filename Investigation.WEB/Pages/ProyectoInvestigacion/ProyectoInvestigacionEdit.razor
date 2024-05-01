@@ -1,0 +1,75 @@
+﻿@page "/ProyectoInvestigaciones/edit/{Id:int}"
+@using System.Net
+@inject NavigationManager navigationManager
+@inject IRepository repository
+@inject SweetAlertService sweetAlertService
+
+<h3>ProyectoInvestigacionEdit</h3>
+
+@if (proyectoInvestigacion is null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <ProyectoInvestigacionForm @ref="ProyectoInvestigacionForm"  ProyectoInvestigacion="proyectoInvestigacion" OnValidSubmit="Editar" ReturnAction="Return"/>
+
+}
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private ProyectoInvestigacion proyectoInvestigacion;
+    private ProyectoInvestigacionForm ProyectoInvestigacionForm;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var responseHttp = await repository.GetAsync<ProyectoInvestigacion>($"api/ProyectoInvestigaciones/{Id}");
+        if (responseHttp.Error)
+        {
+            if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("/ProyectoInvestigaciones");
+            }
+            else
+            {
+                var messsage = await responseHttp.GetErrorMessageAsync();
+                await sweetAlertService.FireAsync("Error", messsage, SweetAlertIcon.Error);
+            }
+        }
+        else
+        {
+            proyectoInvestigacion = responseHttp.Response;
+        }
+    }
+
+
+    private async Task Editar()
+    {
+        var responseHttp = await repository.PutAsync("/api/ProyectoInvestigaciones", proyectoInvestigacion);
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message);
+            return;
+        }
+
+        Return();
+        var toast = sweetAlertService.Mixin(new SweetAlertOptions
+            {
+                Toast = true,
+                Position = SweetAlertPosition.BottomEnd,
+                ShowConfirmButton = true,
+                Timer = 3000
+            });
+        await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Cambios guardados con éxito.");
+    }
+
+    private void Return()
+    {
+        ProyectoInvestigacionForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/ProyectoInvestigaciones");
+    }
+
+}

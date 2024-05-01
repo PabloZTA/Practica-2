@@ -1,0 +1,60 @@
+﻿@page "/ProyectoInvestigaciones"
+@using Investigation.Shared.Entities
+@using Investigation.WEB.Repositories
+@using Investigation.WEB.Shared
+@inject IRepository repository
+@inject SweetAlertService SweetAlertService
+
+<h3>ProyectoInvestigacionIndex</h3>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/Investigadores/create">Nueva Publicacion</a>
+</div>
+
+<GenericList MyList="ProyectoInvestigaciones">
+
+    <Body>
+        <div class="align-items-center">
+        </div>
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Proyectos de investigacion</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ProyectoInvestigacion in ProyectoInvestigaciones!)
+                {
+                    <tr>
+                        <td>@ProyectoInvestigacion.Nombre_Proyecto</td>
+                        <td>@ProyectoInvestigacion.Descripcion</td>
+                        <td>@ProyectoInvestigacion.FechaInicio</td>
+                        <td>@ProyectoInvestigacion.FechaFinal</td>
+
+                        <td>
+                            <a class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger">Borrar</button>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </Body>
+
+</GenericList>
+
+@code {
+    public List<ProyectoInvestigacion>? ProyectoInvestigaciones { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHppt = await repository.GetAsync<List<ProyectoInvestigacion>>("/api/ProyectoInvestigaciones");
+        ProyectoInvestigaciones = responseHppt.Response!;
+    }
+}

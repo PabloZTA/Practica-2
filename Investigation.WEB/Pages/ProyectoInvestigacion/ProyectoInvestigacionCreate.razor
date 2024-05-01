@@ -1,23 +1,23 @@
-﻿@page "/Publicaciones/create"
+﻿@page "/ProyectoInvestigaciones/create"
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService SweetAlertService
 
 
-<h3>InvestigadorCreate</h3>
+<h3>ProyectoInvestigacionCreate</h3>
 
-<PublicacionForm @ref="PublicacionForm" Publicaciones="Publicacion" OnSubmit="Create" ReturnAction="Return" />
+<ProyectoInvestigacionForm @ref="ProyectoInvestigacionForm" ProyectoInvestigacion="proyectoInvestigacion" OnSubmit="Create" ReturnAction="Return" />
 
 
 @code {
-    private Publicacion publicacion = new();
-    private PublicacionForm PublicacionForm;
+    private ProyectoInvestigacion proyectoInvestigacion = new();
+    private ProyectoInvestigacionForm ProyectoInvestigacionForm;
 
 
 
     private async Task Create()
     {
-        var responseHttp = await repository.Post("/api/Publicaciones", publicacion);
+        var responseHttp = await repository.Post("/api/ProyectoInvestigaciones", proyectoInvestigacion);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -40,8 +40,8 @@
 
     private void Return()
     {
-        PublicacionForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("/Publicaciones");
+        ProyectoInvestigacionForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/ProyectoInvestigaciones");
     }
 
 
