@@ -6,18 +6,18 @@
 
 <h3>InvestigadorCreate</h3>
 
-<InvestigadorForm @ref="InvestigadorForm" Investigadoress="investigador" OnSubmit="Create" ReturnAction="Return" />
+<PublicacionForm @ref="PublicacionForm" Publicaciones="Publicacion" OnSubmit="Create" ReturnAction="Return" />
 
 
 @code {
-    private Investigadores investigador = new();
-    private InvestigadorForm InvestigadorForm;
+    private Publicacion publicacion = new();
+    private PublicacionForm PublicacionForm;
 
 
 
     private async Task Create()
     {
-        var responseHttp = await repository.Post("/api/Investigadores", investigador);
+        var responseHttp = await repository.Post("/api/Publicacion", publicacion);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -40,8 +40,8 @@
 
     private void Return()
     {
-        InvestigadorForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("/Investigadores");
+        PublicacionForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/Publicacion");
     }
 
 

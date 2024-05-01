@@ -5,32 +5,32 @@
 @inject SweetAlertService SweetAlertService
  
 
-<EditForm Model="Investigadoress" OnSubmit="OnSubmit" ReturnAction="Return">
+<EditForm Model="publicacion" OnSubmit="OnSubmit" ReturnAction="Return">
     <DataAnnotationsValidator/>
 
 
     <div class="mb-3">
-        <label>Nombre:</label>
+        <label>Titulo:</label>
         <div>
-            <InputText @bind-Value="Investigadoress.Nombre" />
-            <ValidationMessage For="@(()=>Investigadoress.Nombre)" />
+            <InputText @bind-Value="publicacion.Titulo" />
+            <ValidationMessage For="@(()=>publicacion.Titulo)" />
         </div>
     </div>
 
     <div class="mb-3">
-        <label>Especialidad:</label>
+        <label>Autor:</label>
         <div>
-            <InputText @bind-Value="Investigadoress.especialidad" />
-            <ValidationMessage For="@(()=>Investigadoress.especialidad)" />
+            <InputText @bind-Value="publicacion.Autor" />
+            <ValidationMessage For="@(()=>publicacion.Autor)" />
         </div>
     </div>
 
 
     <div class="mb-3">
-        <label>Afiliacion:</label>
+        <label>Fecha de Publicacion:</label>
         <div>
-            <InputText @bind-Value="Investigadoress.afiliacion" />
-            <ValidationMessage For="@(()=>Investigadoress.afiliacion)" />
+            <InputDate @bind-Value="publicacion.FechaPublicacion" />
+            <ValidationMessage For="@(()=>publicacion.FechaPublicacion)" />
         </div>
     </div>
 
@@ -39,8 +39,6 @@
     <button class="btn btn-info" type="reset">Limpiar</button>
     <button class="btn btn-success" onclick="ReturnAction">Regresar</button>
 
-
-
 </EditForm>
 
 @code {
@@ -48,7 +46,7 @@
     [EditorRequired]
     [Parameter]
 
-    public Investigadores Investigadoress { get; set; }
+    public Publicacion publicacion { get; set; }
 
 
     [EditorRequired]

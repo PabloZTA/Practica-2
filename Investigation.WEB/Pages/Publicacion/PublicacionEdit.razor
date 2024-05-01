@@ -1,18 +1,18 @@
-﻿@page "/Investigadores/edit/{Id:int}"
+﻿@page "/Publicaciones/edit/{Id:int}"
 @using System.Net
 @inject NavigationManager navigationManager
 @inject IRepository repository
 @inject SweetAlertService sweetAlertService
 
-<h3>InvestigadorEdit</h3>
+<h3>PublicacionEdit</h3>
 
-@if (investigadores is null)
+@if (Publicacion is null)
 {
     <p>Cargando...</p>
 }
 else
 {
-    <InvestigadorForm @ref="InvestigadorForm"  Investigadores="investigadores" OnValidSubmit="Editar" ReturnAction="Return"/>
+    <PublicacionForm @ref="PublicacionForm"  Publicacion="Publicacion" OnValidSubmit="Editar" ReturnAction="Return"/>
 
 }
 
@@ -20,17 +20,17 @@ else
 @code {
     [Parameter]
     public int Id { get; set; }
-    private Investigadores investigadores;
-    private InvestigadorForm InvestigadorForm;
+    private Publicacion Publicacion;
+    private PublicacionForm PublicacionForm;
 
     protected override async Task OnParametersSetAsync()
     {
-        var responseHttp = await repository.GetAsync<Investigadores>($"api/Investigadores/{Id}");
+        var responseHttp = await repository.GetAsync<Publicacion>($"api/Publicaciones/{Id}");
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
-                navigationManager.NavigateTo("/Investigadores");
+                navigationManager.NavigateTo("/Publicaciones");
             }
             else
             {
@@ -40,14 +40,14 @@ else
         }
         else
         {
-            investigadores = responseHttp.Response;
+            Publicacion = responseHttp.Response;
         }
     }
 
 
     private async Task Editar()
     {
-        var responseHttp = await repository.PutAsync("/api/Investigadores", investigadores);
+        var responseHttp = await repository.PutAsync("/api/Publicaciones", Publicacion);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -68,8 +68,8 @@ else
 
     private void Return()
     {
-        InvestigadorForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("/Investigadores");
+        PublicacionForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/Publicaciones");
     }
 
 }

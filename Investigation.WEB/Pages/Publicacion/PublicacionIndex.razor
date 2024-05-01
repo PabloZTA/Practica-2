@@ -1,17 +1,17 @@
-﻿@page "/Investigadores"
+﻿@page "/Publicaciones"
 @using Investigation.Shared.Entities
 @using Investigation.WEB.Repositories
 @using Investigation.WEB.Shared
 @inject IRepository repository
 @inject SweetAlertService SweetAlertService
 
-<h3>InvestigadorIndex</h3>
+<h3>PublicacionIndex</h3>
 
 <div class="mb-3">
-    <a class="btn btn-primary" href="/Investigadores/create">Nuevo Investigador</a>
+    <a class="btn btn-primary" href="/Investigadores/create">Nueva Publicacion</a>
 </div>
 
-<GenericList MyList="Investigadores">
+<GenericList MyList="Publicaciones">
 
     <Body>
         <div class="align-items-center">
@@ -21,18 +21,18 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Investigadores</th>
+                    <th>Publicaciones</th>
                     <th></th>
 
                 </tr>
             </thead>
             <tbody>
-                @foreach (var Investigadores in Investigadores!)
+                @foreach (var Publicacion in Publicaciones!)
                 {
                     <tr>
-                        <td>@Investigadores.Nombre</td>
-                        <td>@Investigadores.especialidad</td>
-                        <td>@Investigadores.afiliacion</td>
+                        <td>@Publicacion.Titulo</td>
+                        <td>@Publicacion.Autor</td>
+                        <td>@Publicacion.FechaPublicacion</td>
 
 
                         <td>
@@ -50,11 +50,11 @@
 </GenericList>
 
 @code {
-    public List<Investigadores>?  Investigadores { get; set; }
+    public List<Publicacion>?  Publicaciones { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        var responseHppt = await repository.GetAsync<List<Investigadores>>("/api/Investigadores");
-        Investigadores = responseHppt.Response!;
+        var responseHppt = await repository.GetAsync<List<Publicacion>>("/api/Publicaciones");
+        Publicaciones = responseHppt.Response!;
     }
 }
