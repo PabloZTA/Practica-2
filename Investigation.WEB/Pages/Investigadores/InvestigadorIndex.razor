@@ -1,4 +1,4 @@
-﻿@page "/Investigadores"
+﻿﻿@page "/Investigadores"
 @using Investigation.Shared.Entities
 @using Investigation.WEB.Repositories
 @using Investigation.WEB.Shared
@@ -6,57 +6,50 @@
 @inject SweetAlertService sweetAlertService
 @inject NavigationManager navigationManager
 
-<h1>Investigadores</h1>
-
 <div class="card">
     <div class="card-header">
         <span>
             <i class="bi bi-person" /> Investigadores
-            <a class="btn btn-primary btn-sm float-end" href="/Investigadores/create"><i class="bi bi-plus-circle"/>Nuevos Investigadores</a>
+            <a class="btn btn-primary btn-sm float-end" href="/Investigadores/create"><i class="bi bi-plus-circle" />New Investigador</a>
 
         </span>
-</div>
+    </div>
 
     <div class="card-body">
 
-<GenericList MyList="Investigadores">
+        <GenericList MyList="Investigadores">
 
-    <Body>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Investigadores!)
-                {
-                    <tr>
-                        <td>
+            <Body>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Investigadores!)
+                        {
+                            <tr>
+                                <td> @item.Nombre</td>
+                                <td>@item.afiliacion</td>
+                                <td>@item.especialidad</td>
+
+                                <td>
                                     <a href="/Investigadores/edit/@item.Id" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square" /> Editar</a>
-                                    <button @onclick=@(() => DeleteAsycn(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"/> Borrar</button>
-                        </td>
-                        
-                        <td>
-                            @item.Nombre
-                        </td>
-                        <td>
-                            @item.especialidad
-                        </td>
-                        <td>
-                            @item.afiliacion
-                        </td>       
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </Body>
-</GenericList>
+                                    <button @onclick=@(() => DeleteAsycn(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill" /> Borrar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </Body>
+        </GenericList>
     </div>
 </div>
 
+
 @code {
-    public List<Investigadores> Investigadores { get; set; }
+    public List<Investigador> Investigadores { get; set; }
 
 
     protected override async Task OnInitializedAsync()
@@ -66,7 +59,7 @@
 
     private async Task LoadAsync()
     {
-        var responseHttp = await repository.GetAsync<List<Investigadores>>("api/Investigadores");
+        var responseHttp = await repository.GetAsync<List<Investigador>>("api/Investigadores");
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -78,12 +71,12 @@
 
 
 
-    private async Task DeleteAsycn(Investigadores investigadores)
+    private async Task DeleteAsycn(Investigador investigador)
     {
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
-                Text = $"¿Estas seguro de querer borrar el owner: {investigadores.Nombre}?",
+                Text = $"¿Estas seguro de querer borrar el investigador: {investigador.Nombre}?",
                 Icon = SweetAlertIcon.Question,
                 ShowCancelButton = true,
             });
@@ -93,7 +86,7 @@
             return;
         }
 
-        var responseHttp = await repository.DeleteAsync<Investigadores>($"api/Investigadores/{investigadores.Id}");
+        var responseHttp = await repository.DeleteAsync<Investigador>($"api/Investigadores/{investigador.Id}");
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -118,6 +111,4 @@
             });
         await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con éxito.");
     }
-
-
 }

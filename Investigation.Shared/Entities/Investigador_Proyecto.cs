@@ -16,7 +16,7 @@ namespace Investigation.Shared.Entities
         public int ProyectoInvestigacionId { get; set; }
 
         [JsonIgnore]
-        public Investigadores Investigadoress { get; set; }
-        public int InvestigadoresId { get; set;}
+        public Investigador Investigadores { get; set; }
+        public int InvestigadorId { get; set;}
     }
 }

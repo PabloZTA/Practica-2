@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Investigation.Shared.Entities
 {
-    public class Investigadores
+    public class Investigador
     {
         public int Id { get; set; }
 

@@ -31,7 +31,7 @@ namespace Investigation.API.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(int Id_Investigador, int Id_Proyecto)
         {
-            var Investigador = await _context.Investigadoress.FindAsync(Id_Investigador);
+            var Investigador = await _context.Investigadores.FindAsync(Id_Investigador);
             var Proyecto = await _context.ProyectoInvestigaciones.FindAsync(Id_Proyecto);
 
             if (Investigador == null)

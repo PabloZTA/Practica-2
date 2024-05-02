@@ -1,67 +1,69 @@
-﻿
-﻿@using Investigation.Shared.Entities
-@using Investigation.WEB.Repositories
-@using Investigation.WEB.Shared
-@inject IRepository repository
-@inject SweetAlertService SweetAlertService
+﻿﻿﻿@using Investigation.Shared.Entities
+@inject SweetAlertService swal
 
-<h3>InvestigadoresForm</h3>
+<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation"></NavigationLock>
 
-<EditForm Model="investigadores" OnSubmit="OnValidSubmit" ReturnAction="Return">
+
+<EditForm EditContext="editContext" OnValidSubmit="OnSubmit">
     <DataAnnotationsValidator />
-
 
     <div class="mb-3">
         <label>Nombre:</label>
         <div>
-            <InputText @bind-Value="investigadores.Nombre" />
-            <ValidationMessage For="@(()=>investigadores.Nombre)" />
+            <InputText class="form-control" @bind-Value="Investigador.Nombre" />
+            <ValidationMessage For="@(()=>Investigador.Nombre)" />
+        </div>
+    </div>
+
+
+    <div class="mb-3">
+        <label>Afiliación:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="Investigador.afiliacion" />
+            <ValidationMessage For="@(()=>Investigador.afiliacion)" />
         </div>
     </div>
 
     <div class="mb-3">
         <label>Especialidad:</label>
         <div>
-            <InputText @bind-Value="investigadores.especialidad" />
-            <ValidationMessage For="@(()=>investigadores.especialidad)" />
+            <InputText class="form-control" @bind-Value="Investigador.especialidad" />
+            <ValidationMessage For="@(()=>Investigador.especialidad)" />
         </div>
     </div>
-
-
-    <div class="mb-3">
-        <label>Afiliacion:</label>
-        <div>
-            <InputText @bind-Value="investigadores.afiliacion" />
-            <ValidationMessage For="@(()=>investigadores.afiliacion)" />
-        </div>
-    </div>
-
 
     <button class="btn btn-primary" type="submit">Guardar</button>
     <button class="btn btn-info" type="reset">Limpiar</button>
-    <button class="btn btn-success" onclick="ReturnAction">Regresar</button>
+    <button class="btn btn-success" @onclick="ReturnAction">Regresar</button>
 
 </EditForm>
+
 
 @code {
 
     private EditContext editContext = null!;
     protected override void OnInitialized()
     {
-        editContext = new(investigadores);
+        editContext = new(Investigador);
     }
-    [Parameter]
-    [EditorRequired]
-    public Investigadores investigadores { get; set; } = null!;
 
-    [Parameter]
     [EditorRequired]
-    public EventCallback OnValidSubmit { get; set; }
+    [Parameter]
+
+    public Investigador Investigador { get; set; }
+
+
+    [EditorRequired]
+    [Parameter]
+    public EventCallback OnSubmit { get; set; }
+
+
     [EditorRequired]
     [Parameter]
     public EventCallback ReturnAction { get; set; }
 
-    public bool FormularioPosteadoConExito { get; set; } = false;
+
+    public bool FormPostedSuccessfully { get; set; } = false;
 
     private async Task OnBeforeInternalNavigation(LocationChangingContext context)
     {
@@ -72,12 +74,12 @@
             return;
         }
 
-        if (FormularioPosteadoConExito)
+        if (FormPostedSuccessfully)
         {
             return;
         }
 
-        var resultado = await SweetAlertService.FireAsync(new SweetAlertOptions
+        var resultado = await swal.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
                 Text = "¿Deseas abandonar la página y perder los cambios?",
@@ -94,4 +96,5 @@
 
         context.PreventNavigation();
     }
+
 }
