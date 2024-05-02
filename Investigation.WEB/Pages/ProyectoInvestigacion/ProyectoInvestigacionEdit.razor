@@ -1,4 +1,4 @@
-﻿@page "/ProyectoInvestigaciones/edit/{Id:int}"
+﻿@page "/ProyectoInvestigacion/edit/{Id:int}"
 @using System.Net
 @inject NavigationManager navigationManager
 @inject IRepository repository
@@ -25,12 +25,12 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        var responseHttp = await repository.GetAsync<ProyectoInvestigacion>($"api/ProyectoInvestigaciones/{Id}");
+        var responseHttp = await repository.GetAsync<ProyectoInvestigacion>($"api/ProyectoInvestigacion/{Id}");
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
-                navigationManager.NavigateTo("/ProyectoInvestigaciones");
+                navigationManager.NavigateTo("/ProyectoInvestigacion");
             }
             else
             {
@@ -47,7 +47,7 @@ else
 
     private async Task Editar()
     {
-        var responseHttp = await repository.PutAsync("/api/ProyectoInvestigaciones", proyectoInvestigacion);
+        var responseHttp = await repository.PutAsync("/api/ProyectoInvestigacion", proyectoInvestigacion);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -69,7 +69,7 @@ else
     private void Return()
     {
         ProyectoInvestigacionForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("/ProyectoInvestigaciones");
+        navigationManager.NavigateTo("/ProyectoInvestigacion");
     }
 
 }

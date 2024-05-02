@@ -1,4 +1,4 @@
-﻿﻿@page "/Investigadores"
+﻿@page "/Investigadores"
 @using Investigation.Shared.Entities
 @using Investigation.WEB.Repositories
 @using Investigation.WEB.Shared
@@ -6,11 +6,13 @@
 @inject SweetAlertService sweetAlertService
 @inject NavigationManager navigationManager
 
+<h1>Investigadores</h1>
+
 <div class="card">
     <div class="card-header">
         <span>
             <i class="bi bi-person" /> Investigadores
-            <a class="btn btn-primary btn-sm float-end" href="/Investigadores/create"><i class="bi bi-plus-circle"/>New Investigadores</a>
+            <a class="btn btn-primary btn-sm float-end" href="/Investigadores/create"><i class="bi bi-plus-circle"/>Nuevos Investigadores</a>
 
         </span>
 </div>

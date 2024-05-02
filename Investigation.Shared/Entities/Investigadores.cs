@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Investigation.Shared.Entities
@@ -25,6 +26,7 @@ namespace Investigation.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string afiliacion { get; set; }
 
+        [JsonIgnore]
         public ProyectoInvestigacion ProyectoInvestigacion { get; set; } 
     }
 }

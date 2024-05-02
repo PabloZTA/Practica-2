@@ -95,5 +95,19 @@ namespace Investigation.WEB.Repositories
             return new HttpResponseWrapper<TResponse>(default, !responseHttp.IsSuccessStatusCode, responseHttp);
         }
 
+        public Task<HttpResponseWrapper<object>> PostAsync<T>(string url, T model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<HttpResponseWrapper<TActionResponse>> PostAsync<T, TActionResponse>(string url, T model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<HttpResponseWrapper<object>> DeleteAsync<T>(string url)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

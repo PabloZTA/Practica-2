@@ -1,43 +1,32 @@
-﻿﻿@page "/ActividadesInvestigacion/create"
+﻿@page "/ActividadesInvestigacion/create"
 @inject NavigationManager navigationManager
 @inject IRepository repository
 @inject SweetAlertService sweetAlertService
+
 <h3>ActividadesInvestigacionCreate</h3>
 
-<ActividadesInvestigacionForm @ref="actividadesInvesticionForm" ActividadesInvestigacion="actividadesInvestigacion" OnValidSubmit="Create" ReturnAction="Return"/>
+<ActividadesInvestigacionForm @ref="ActividadesInvestigacionForm" ActividadesInvestigacion="actividadesInvestigacion" OnValidSubmit="Create" ReturnAction="Return"/>
 @code {
     private ActividadesInvestigacion actividadesInvestigacion = new ActividadesInvestigacion();
-    private ActividadesInvestigacionForm actividadesInvestigacionForm;
-
-
+    private ActividadesInvestigacionForm ActividadesInvestigacionForm;
 
     private async Task Create()
     {
-
-
         var responseHttp = await repository.PostAsync("/api/ActividadesInvestigacion", actividadesInvestigacion);
         if (responseHttp.Error)
         {
-
             var message = await responseHttp.GetErrorMessageAsync();
             await sweetAlertService.FireAsync("Error", message);
             return;
-
-
         }
 
         Return();
         var toast = sweetAlertService.Mixin(new SweetAlertOptions
             {
-
                 Toast = true,
                 Position = SweetAlertPosition.BottomEnd,
                 ShowConfirmButton = true,
                 Timer = 3000
-
-
-
-
             });
 
 
@@ -47,16 +36,8 @@
 
     private void Return()
     {
-
-
-
-
-        actividadesInvestigacionForm!.FormularioPosteadoConExito = true;
-        navigationManager.NavigateTo("/actividadesInvestigacion");
-
-
-
-
+        ActividadesInvestigacionForm!.FormularioPosteadoConExito = true;
+        navigationManager.NavigateTo("/ActividadesInvestigacion");
     }
 
 }

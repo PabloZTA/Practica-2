@@ -1,60 +1,126 @@
-﻿@page "/ProyectoInvestigaciones"
+﻿@page "/ProyectoInvestigacion"
 @using Investigation.Shared.Entities
 @using Investigation.WEB.Repositories
 @using Investigation.WEB.Shared
 @inject IRepository repository
-@inject SweetAlertService SweetAlertService
+@inject SweetAlertService sweetAlertService
+@inject NavigationManager navigationManager
 
-<h3>ProyectoInvestigacionIndex</h3>
+<div class="card">
+    <div class="card-header">
+        <span>
+            <i class="bi bi-person" /> ProyectoInvestigacion
+            <a class="btn btn-primary btn-sm float-end" href="/ProyectoInvestigacion/create"><i class="bi bi-plus-circle" />New Actividadesinvestigacion</a>
 
-<div class="mb-3">
-    <a class="btn btn-primary" href="/Investigadores/create">Nueva Publicacion</a>
+        </span>
+    </div>
+
+    <div class="card-body">
+
+        <GenericList MyList="proyectoInvestigacions">
+
+            <Body>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in proyectoInvestigacions!)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/ProyectoInvestigacion/edit/@item.Id" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square" /> Editar</a>
+                                    <button @onclick=@(() => DeleteAsycn(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill" /> Borrar</button>
+                                </td>
+
+                                <td>
+                                    @item.Nombre_Proyecto
+                                </td>
+                                <td>
+                                    @item.Descripcion
+                                </td>
+                                <td>
+                                    @item.FechaInicio
+                                </td>
+
+                                <td>
+                                    @item.FechaFinal
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </Body>
+        </GenericList>
+    </div>
 </div>
 
-<GenericList MyList="ProyectoInvestigaciones">
-
-    <Body>
-        <div class="align-items-center">
-        </div>
-
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Proyectos de investigacion</th>
-                    <th></th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var ProyectoInvestigacion in ProyectoInvestigaciones!)
-                {
-                    <tr>
-                        <td>@ProyectoInvestigacion.Nombre_Proyecto</td>
-                        <td>@ProyectoInvestigacion.Descripcion</td>
-                        <td>@ProyectoInvestigacion.FechaInicio</td>
-                        <td>@ProyectoInvestigacion.FechaFinal</td>
-
-                        <td>
-                            <a class="btn btn-warning">Editar</a>
-                            <button class="btn btn-danger">Borrar</button>
-                        </td>
-
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-    </Body>
-
-</GenericList>
-
 @code {
-    public List<ProyectoInvestigacion>? ProyectoInvestigaciones { get; set; }
+    public List<ProyectoInvestigacion> proyectoInvestigacions { get; set; }
 
-    protected async override Task OnInitializedAsync()
+
+    protected override async Task OnInitializedAsync()
     {
-        var responseHppt = await repository.GetAsync<List<ProyectoInvestigacion>>("/api/ProyectoInvestigaciones");
-        ProyectoInvestigaciones = responseHppt.Response!;
+        await LoadAsync();
     }
+
+    private async Task LoadAsync()
+    {
+        var responseHttp = await repository.GetAsync<List<ProyectoInvestigacion>>("api/ProyectoInvestigacion");
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+        proyectoInvestigacions = responseHttp.Response;
+    }
+
+
+
+    private async Task DeleteAsycn(ProyectoInvestigacion proyectoInvestigacions)
+    {
+        var result = await sweetAlertService.FireAsync(new SweetAlertOptions
+            {
+                Title = "Confirmación",
+                Text = $"¿Estas seguro de querer borrar la actividad?: {proyectoInvestigacions.Nombre_Proyecto}?",
+                Icon = SweetAlertIcon.Question,
+                ShowCancelButton = true,
+            });
+        var confirm = string.IsNullOrEmpty(result.Value);
+        if (confirm)
+        {
+            return;
+        }
+
+        var responseHttp = await repository.DeleteAsync<ProyectoInvestigacion>($"api/ProyectoInvestigacion/{proyectoInvestigacions.Id}");
+        if (responseHttp.Error)
+        {
+            if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("/ProyectoInvestigacion");
+            }
+            else
+            {
+                var mensajeError = await responseHttp.GetErrorMessageAsync();
+                await sweetAlertService.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+            }
+            return;
+        }
+
+        await LoadAsync();
+        var toast = sweetAlertService.Mixin(new SweetAlertOptions
+            {
+                Toast = true,
+                Position = SweetAlertPosition.BottomEnd,
+                ShowConfirmButton = true,
+                Timer = 3000
+            });
+        await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con éxito.");
+    }
+
+
 }

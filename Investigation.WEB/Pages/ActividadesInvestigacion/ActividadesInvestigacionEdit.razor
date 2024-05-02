@@ -1,4 +1,4 @@
-﻿﻿@page "/ActividadesInvestigacion/edit/{Id:int}"
+﻿@page "/ActividadesInvestigacion/edit/{Id:int}"
 @using System.Net
 @inject NavigationManager navigationManager
 @inject IRepository repository
@@ -10,14 +10,14 @@
 }
 else
 {
-    <ActividadesInvestigacionForm @ref="actividadesInvestigacionForm"  ActividadesInvestigacion="actividadesInvestigacion" OnValidSubmit="Editar" ReturnAction="Return"/>
+    <ActividadesInvestigacionForm @ref="ActividadesInvestigacionForm"  ActividadesInvestigacion="actividadesInvestigacion" OnValidSubmit="Editar" ReturnAction="Return"/>
 
 }
 @code {
     [Parameter]
     public int Id { get; set; }
     private ActividadesInvestigacion actividadesInvestigacion;
-    private ActividadesInvestigacionForm actividadInvestigacionForm;
+    private ActividadesInvestigacionForm ActividadesInvestigacionForm;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -64,7 +64,7 @@ else
 
     private void Return()
     {
-        actividadesInvestigacionForm!.FormularioPosteadoConExito = true;
+        ActividadesInvestigacionForm!.FormularioPosteadoConExito = true;
         navigationManager.NavigateTo("/ActividadesInvestigacion");
     }
 }

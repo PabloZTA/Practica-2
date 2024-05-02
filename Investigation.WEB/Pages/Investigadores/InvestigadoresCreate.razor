@@ -14,7 +14,7 @@
 
     private async Task Create()
     {
-        var responseHttp = await repository.Post("/api/Investigadores", investigadores);
+        var responseHttp = await repository.PostAsync("/api/Investigadores", investigadores);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -34,7 +34,7 @@
     }
     private void Return()
     {
-        InvestigadoresForm!.FormPostedSuccessfully = true;
+        InvestigadoresForm!.FormularioPosteadoConExito = true;
         navigationManager.NavigateTo("/Investigadores");
     }
 }

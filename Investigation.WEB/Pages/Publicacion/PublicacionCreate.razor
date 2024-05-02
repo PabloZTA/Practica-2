@@ -4,7 +4,7 @@
 @inject SweetAlertService SweetAlertService
 
 
-<h3>InvestigadorCreate</h3>
+<h3>PublicacionCreate</h3>
 
 <PublicacionForm @ref="PublicacionForm" Publicaciones="Publicacion" OnSubmit="Create" ReturnAction="Return" />
 
@@ -17,7 +17,7 @@
 
     private async Task Create()
     {
-        var responseHttp = await repository.Post("/api/Publicaciones", publicacion);
+        var responseHttp = await repository.PostAsync("/api/Publicaciones", publicacion);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();

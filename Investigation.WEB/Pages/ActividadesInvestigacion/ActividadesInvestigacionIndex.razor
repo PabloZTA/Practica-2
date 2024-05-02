@@ -1,4 +1,4 @@
-﻿﻿@page "/ActividadesInvestigacion"
+﻿@page "/ActividadesInvestigacion"
 @using Investigation.Shared.Entities
 @using Investigation.WEB.Repositories
 @using Investigation.WEB.Shared
@@ -17,7 +17,7 @@
 
     <div class="card-body">
 
-<GenericList MyList="ActividadesInvestigacion">
+<GenericList MyList="actividadesInvestigacion">
 
     <Body>
         <table class="table table-striped">
@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in ActividadesInvestigacion!)
+                @foreach (var item in actividadesInvestigacion!)
                 {
                     <tr>
                         <td>
@@ -59,7 +59,7 @@
 </div>
 
 @code {
-    public List<ActividadesInvestigacion> ActividadesInvestigacion { get; set; }
+    public List<ActividadesInvestigacion> actividadesInvestigacion { get; set; }
 
 
     protected override async Task OnInitializedAsync()
@@ -76,7 +76,7 @@
             await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
-        ActividadesInvestigacion = responseHttp.Response;
+        actividadesInvestigacion = responseHttp.Response;
     }
 
 
@@ -86,7 +86,7 @@
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
-                Text = $"¿Estas seguro de querer borrar el owner: {actividadesInvestigacion.Nombre}?",
+                Text = $"¿Estas seguro de querer borrar la actividad?: {actividadesInvestigacion.Nombre}?",
                 Icon = SweetAlertIcon.Question,
                 ShowCancelButton = true,
             });
@@ -101,7 +101,7 @@
         {
             if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                navigationManager.NavigateTo("actividadesInvestigacion");
+                navigationManager.NavigateTo("/actividadesInvestigacion");
             }
             else
             {

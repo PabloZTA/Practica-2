@@ -1,4 +1,8 @@
-﻿﻿@inject SweetAlertService swal
+﻿@using Investigation.Shared.Entities
+@using Investigation.WEB.Repositories
+@using Investigation.WEB.Shared
+@inject IRepository repository
+@inject SweetAlertService SweetAlertService
 ﻿
 ﻿
 <h3>ActividadesInvestigacionForm</h3>
@@ -8,7 +12,7 @@
 
 
 <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
-    <DataAnnotationsValidator />
+    <DataAnnotationsValidator/>
 
 
     <div class="mb-3">
@@ -30,7 +34,7 @@
     <div class="mb-3">
         <label>FechaInicio:</label>
         <div>
-            <InputText width="10" @bind-Value="actividadesInvestigacion.FechaInicio"></InputText>
+            <InputDate width="10" @bind-Value="actividadesInvestigacion.FechaInicio"></InputDate>
             <ValidationMessage For="@(() => actividadesInvestigacion.FechaInicio)" />
         </div>
     </div>
@@ -39,7 +43,7 @@
     <div class="mb-3">
         <label>FechaFinal:</label>
         <div>
-            <InputText width="10" @bind-Value="actividadesInvestigacion.FechaFinal"></InputText>
+            <InputDate width="10" @bind-Value="actividadesInvestigacion.FechaFinal"></InputDate>
             <ValidationMessage For="@(() => actividadesInvestigacion.FechaFinal)" />
         </div>
     </div>
@@ -54,7 +58,7 @@
     private EditContext editContext = null!;
     protected override void OnInitialized()
     {
-        editContext = new(ActividadesInvestigacion);
+        editContext = new(actividadesInvestigacion);
     }
 
 
@@ -90,7 +94,7 @@
             return;
         }
 
-        var resultado = await swal.FireAsync(new SweetAlertOptions
+        var resultado = await SweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
                 Text = "¿Deseas abandonar la página y perder los cambios?",

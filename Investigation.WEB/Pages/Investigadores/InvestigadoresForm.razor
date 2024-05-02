@@ -7,7 +7,7 @@
 
 <h3>InvestigadoresForm</h3>
 
-<EditForm Model="investigadores" OnSubmit="OnSubmit" ReturnAction="Return">
+<EditForm Model="investigadores" OnSubmit="OnValidSubmit" ReturnAction="Return">
     <DataAnnotationsValidator />
 
 
@@ -77,7 +77,7 @@
             return;
         }
 
-        var resultado = await swal.FireAsync(new SweetAlertOptions
+        var resultado = await SweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
                 Text = "¿Deseas abandonar la página y perder los cambios?",

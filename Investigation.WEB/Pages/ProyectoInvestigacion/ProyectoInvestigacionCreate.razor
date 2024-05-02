@@ -1,4 +1,4 @@
-﻿@page "/ProyectoInvestigaciones/create"
+﻿@page "/ProyectoInvestigacion/create"
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService SweetAlertService
@@ -13,11 +13,9 @@
     private ProyectoInvestigacion proyectoInvestigacion = new();
     private ProyectoInvestigacionForm ProyectoInvestigacionForm;
 
-
-
     private async Task Create()
     {
-        var responseHttp = await repository.Post("/api/ProyectoInvestigaciones", proyectoInvestigacion);
+        var responseHttp = await repository.PostAsync("/api/ProyectoInvestigacion", proyectoInvestigacion);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -41,7 +39,7 @@
     private void Return()
     {
         ProyectoInvestigacionForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("/ProyectoInvestigaciones");
+        navigationManager.NavigateTo("/ProyectoInvestigacion");
     }
 
 

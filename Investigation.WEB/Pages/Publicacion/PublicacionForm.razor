@@ -43,9 +43,15 @@
 
 @code {
 
+    private EditContext editContext = null!;
+    protected override void OnInitialized()
+    {
+        editContext = new(publicacion);
+    }
+
+
     [EditorRequired]
     [Parameter]
-
     public Publicacion publicacion { get; set; }
 
 
@@ -60,5 +66,37 @@
 
 
     public bool FormPostedSuccessfully { get; set; }
+
+    private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+    {
+        var formularioFueEditado = editContext.IsModified();
+
+        if (!formularioFueEditado)
+        {
+            return;
+        }
+
+        if (FormPostedSuccessfully)
+        {
+            return;
+        }
+
+        var resultado = await SweetAlertService.FireAsync(new SweetAlertOptions
+            {
+                Title = "Confirmación",
+                Text = "¿Deseas abandonar la página y perder los cambios?",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true
+            });
+
+        var confirmado = !string.IsNullOrEmpty(resultado.Value);
+
+        if (confirmado)
+        {
+            return;
+        }
+
+        context.PreventNavigation();
+    }
 
 }
