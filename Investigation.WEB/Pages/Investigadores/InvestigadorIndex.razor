@@ -100,5 +100,16 @@
             }
             return;
         }
+
+        await LoadAsync();
+        var toast = sweetAlertService.Mixin(new SweetAlertOptions
+        {
+            Toast = true,
+            Position = SweetAlertPosition.BottomEnd,
+            ShowConfirmButton = true,
+            Timer = 3000
+
+        });
+        await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con exito, recargue la pagina");
     }
 }

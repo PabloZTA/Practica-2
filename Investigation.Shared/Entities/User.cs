@@ -12,35 +12,20 @@ namespace Investigation.Shared.Entities
     public class User : IdentityUser
     {
 
-        [Display(Name = "Documento")]
-        [MaxLength(20, ErrorMessage = "No se permiten más de 20 caracteres")]
+        [MaxLength(20, ErrorMessage = "No se permiten más de 20 dígitos")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public string Documento { get; set; }
+        public string Document { get; set; }
 
-
-        [Display(Name = "Nombre")]
-        [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres")]
+        [MaxLength(50, ErrorMessage = "No se permiten más de 50 Caracteres")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public string Nombre { get; set; }
+        public string FirstName { get; set; }
 
-        [Display(Name = "Apellido")]
-        [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres")]
+        [MaxLength(50, ErrorMessage = "No se permiten más de 50 Caracteres")]
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public string Apellido { get; set; }
-
-        [Display(Name = "Correo Electronico")]
-        [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        [EmailAddress(ErrorMessage = "Digite un Email válido")]
-        public string CorreoElectronico { get; set; }
-
-        [Display(Name = "Contraseña")]
-        [MaxLength(20, ErrorMessage = "No se permiten más de 20 caracteres")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public string Contraseña { get; set; }
-
-        public string Nombre_Completo => $"{Nombre} {Apellido}";
-
+        public string LastName { get; set; }
+        public string Address { get; set; }
         public UserType UserType { get; set; }
+        public string FullName => $"{FirstName}{LastName}";
+
     }
 }
