@@ -45,10 +45,10 @@ namespace Investigation.API.Helpers
             }
         }
 
-        public async Task<User> GetUserAsync(string correoElectronico)
+        public async Task<User> GetUserAsync(string email)
         {
             return await _context.Users
-            .FirstOrDefaultAsync(x => x.CorreoElectronico == correoElectronico);
+            .FirstOrDefaultAsync(x => x.Email == email);
         }
 
         public async Task<bool> IsUserInRoleAsync(User user, string RoleName)
