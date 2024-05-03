@@ -66,8 +66,8 @@ namespace Investigation.API.Data
             if (!_context.Investigadores.Any())
             {
 
-                _context.Investigadores.Add(new Investigador { Nombre = "Juan", afiliacion = "ETS", Cedula = 12345, especialidad = "Ver anime" });
-                _context.Investigadores.Add(new Investigador { Nombre = "Brayan", afiliacion = "EPM", Cedula = 54321, especialidad = "Jugar DarkSouls" });
+                _context.Investigadores.Add(new Investigador { Nombre = "Juan", afiliacion = "ETS", Cedula = "12345", especialidad = "Ver anime" });
+                _context.Investigadores.Add(new Investigador { Nombre = "Brayan", afiliacion = "EPM", Cedula = "54321", especialidad = "Jugar DarkSouls" });
 
             }
 
