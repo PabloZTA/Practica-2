@@ -1,4 +1,4 @@
-﻿﻿@page "/Investigatores/create"
+﻿@page "/Investigadores/create"
 @inject IRepository repository 
 @inject NavigationManager navigationManager
 @inject SweetAlertService sweetAlertService
@@ -19,26 +19,19 @@
         var responseHttp = await repository.PostAsync("/api/Investigadores", investigador);
         if (responseHttp.Error)
         {
-
             var message = await responseHttp.GetErrorMessageAsync();
             await sweetAlertService.FireAsync("Error", message);
             return;
-
-
         }
 
         Return();
 
         var toast = sweetAlertService.Mixin(new SweetAlertOptions
-            {
-
+        {
                 Toast = true,
                 Position = SweetAlertPosition.BottomEnd,
                 ShowConfirmButton = true,
                 Timer = 3000
-
-
-
 
         });
 
@@ -49,15 +42,8 @@
 
     private void Return()
     {
-
-
-
-
         investigadorForm!.FormPostedSuccessfully = true;
         navigationManager.NavigateTo("/Investigadores");
-
-
-
 
     }
 

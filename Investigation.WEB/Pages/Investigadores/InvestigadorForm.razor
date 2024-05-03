@@ -7,6 +7,16 @@
 <EditForm EditContext="editContext" OnValidSubmit="OnSubmit">
     <DataAnnotationsValidator />
 
+
+
+    <div class="mb-3">
+        <label>Cedula:</label>
+        <div>
+            <InputText  @bind-Value="Investigador.Cedula" />
+            <ValidationMessage For="@(()=>Investigador.Cedula)" />
+        </div>
+    </div>
+
     <div class="mb-3">
         <label>Nombre:</label>
         <div>

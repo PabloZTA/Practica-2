@@ -24,36 +24,36 @@ namespace Investigation.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult>Post(Investigador Investigadores)
+        public async Task<ActionResult>Post(Investigador investigador)
         {
-            _context.Add(Investigadores);
+            _context.Add(investigador);
             await _context.SaveChangesAsync();
-            return Ok(Investigadores);
+            return Ok(investigador);
         }
 
-        [HttpGet("id:int")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult>Get(int id)
         {
 
-            var Investigadores = await
+            var investigador = await
                 _context.Investigadores.FirstOrDefaultAsync(x => x.Id
                 == id);
-            if (Investigadores == null)
+            if (investigador == null)
             {
                 return NotFound();
             }
-            return Ok(Investigadores);
+            return Ok(investigador);
         }
 
         [HttpPut]
-        public async Task<ActionResult>Put(Investigador Investigadores)
+        public async Task<ActionResult>Put(Investigador investigador)
         {
-            _context.Update(Investigadores);
+            _context.Update(investigador);
             await _context.SaveChangesAsync();
-            return Ok(Investigadores);
+            return Ok(investigador);
         }
 
-        [HttpDelete("id:int")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
             

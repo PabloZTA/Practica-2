@@ -12,6 +12,12 @@ namespace Investigation.Shared.Entities
     {
         public int Id { get; set; }
 
+
+        [Display(Name = "Cedula")]
+        [MaxLength(100, ErrorMessage = "No se permiten más de 100 dígitos")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        public string Cedula { get; set; }
+
         [Display(Name ="Nombre")]
         [MaxLength(100, ErrorMessage ="No se permiten más de 100 dígitos")]
         [Required(ErrorMessage ="El campo {0} es obligatorio")]

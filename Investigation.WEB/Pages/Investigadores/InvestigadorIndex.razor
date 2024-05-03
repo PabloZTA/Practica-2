@@ -1,4 +1,4 @@
-﻿﻿@page "/Investigadores"
+﻿@page "/Investigadores"
 @using Investigation.Shared.Entities
 @using Investigation.WEB.Repositories
 @using Investigation.WEB.Shared
@@ -10,7 +10,7 @@
     <div class="card-header">
         <span>
             <i class="bi bi-person" /> Investigadores
-            <a class="btn btn-primary btn-sm float-end" href="/Investigadores/create"><i class="bi bi-plus-circle" />New Investigador</a>
+            <a class="btn btn-primary btn-sm float-end" href="/Investigadores/create"><i class="bi bi-plus-circle" />Nuevo Investigador</a>
 
         </span>
     </div>
@@ -30,13 +30,15 @@
                         @foreach (var item in Investigadores!)
                         {
                             <tr>
-                                <td> @item.Nombre</td>
+                                <td>@item.Id</td>
+                                <td>@item.Cedula</td>
+                                <td>@item.Nombre</td>
                                 <td>@item.afiliacion</td>
                                 <td>@item.especialidad</td>
 
                                 <td>
                                     <a href="/Investigadores/edit/@item.Id" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square" /> Editar</a>
-                                    <button @onclick=@(() => DeleteAsycn(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill" /> Borrar</button>
+                                    <button @onclick=@(() => DeleteAsync(item)) class="btn btn-sm btn-danger"><i class="bi bi-trash-fill" /> Borrar</button>
                                 </td>
                             </tr>
                         }
@@ -69,9 +71,7 @@
         Investigadores = responseHttp.Response;
     }
 
-
-
-    private async Task DeleteAsycn(Investigador investigador)
+    private async Task DeleteAsync(Investigador investigador)
     {
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
@@ -100,15 +100,5 @@
             }
             return;
         }
-
-        await LoadAsync();
-        var toast = sweetAlertService.Mixin(new SweetAlertOptions
-            {
-                Toast = true,
-                Position = SweetAlertPosition.BottomEnd,
-                ShowConfirmButton = true,
-                Timer = 3000
-            });
-        await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con éxito.");
     }
 }

@@ -21,7 +21,7 @@ namespace Investigation.API.Controllers
         public async Task<ActionResult> GetInvestigador_Proyecto()
         {
             var Investigador_Proyectos = await _context.Investigador_Proyectos
-                .Include(ar => ar.Investigadoress)
+                .Include(ar => ar.Investigadores)
                 .Include(ar => ar.ProyectoInvestigaciones)
                 .ToListAsync();
             return Ok(Investigador_Proyectos);
@@ -45,7 +45,7 @@ namespace Investigation.API.Controllers
 
             var IdInvestigatorProyect = new Investigador_Proyecto
             {
-                Investigadoress = Investigador,
+                Investigadores = Investigador,
                 ProyectoInvestigaciones = Proyecto
 
             };
@@ -61,7 +61,7 @@ namespace Investigation.API.Controllers
         public async Task<ActionResult> GetInvestigador_Proyecto(int id)
         {
             var Investigador_Proyectos = await _context.Investigador_Proyectos
-                .Include(ar => ar.Investigadoress)
+                .Include(ar => ar.Investigadores)
                 .Include(ar => ar.ProyectoInvestigaciones)
                 .FirstOrDefaultAsync(ar => ar.Id == id);
 

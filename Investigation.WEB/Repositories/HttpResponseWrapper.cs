@@ -1,6 +1,7 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
+using System.Net;
 using System.Threading.Tasks;
+
 namespace Investigation.WEB.Repositories
 {
     public class HttpResponseWrapper<T>
